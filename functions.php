@@ -54,3 +54,12 @@ add_action( 'wp_head', 'putra_meta_robots_noindex_follow' );
 add_filter( 'locale', function() {
     return 'id_ID';
 });
+
+function putra_yoast_canonical_pagination( $canonical ) {
+	if ( is_paged() ) {
+
+		return preg_replace("/page\/([0-9]+)\//", "", $canonical);
+	}
+	return $canonical;
+}
+add_filter( 'wpseo_canonical', 'putra_yoast_canonical_pagination' );
