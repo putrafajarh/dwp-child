@@ -63,3 +63,19 @@ function putra_yoast_canonical_pagination( $canonical ) {
 	return $canonical;
 }
 add_filter( 'wpseo_canonical', 'putra_yoast_canonical_pagination' );
+
+function add_author_meta() {
+	echo "<meta name=\"publisher\" content=\"PT. Dewaweb\">";
+    if ( is_single() ) {
+        global $post;
+        $author = get_the_author_meta('display_name', $post->post_author);
+        echo '<meta name="author" content="'.$author.'" />';
+    }
+    if ( is_page() ) {
+    	echo "<meta name=\"author\" content=\"Dewaweb Tech Team\" />";
+    }
+    if ( is_home() ) {
+    	echo "<meta name=\"author\" content=\"Dewaweb Tech Team\" />";
+    }
+}
+add_action( 'wp_enqueue_scripts', 'add_author_meta' );
